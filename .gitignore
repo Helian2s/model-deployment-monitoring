@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local AWS inventory reports
+aws-inventory/
+
+# Local EC2 lab state
+.ncp-genl/
