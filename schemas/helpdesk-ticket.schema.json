@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/ncp-genl/helpdesk-ticket.schema.json",
+  "title": "Normalized Helpdesk Ticket",
+  "type": "object",
+  "required": ["id", "source", "title", "body"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1, "maxLength": 300},
+    "body": {"type": "string", "minLength": 1, "maxLength": 8000},
+    "requester_department": {"type": ["string", "null"], "maxLength": 120},
+    "requester_role": {"type": ["string", "null"], "maxLength": 120},
+    "product_or_service": {"type": ["string", "null"], "maxLength": 160},
+    "business_impact": {"type": ["string", "null"], "maxLength": 500},
+    "history": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["role", "content"],
+        "additionalProperties": false,
+        "properties": {
+          "role": {"enum": ["requester", "agent", "system"]},
+          "content": {"type": "string", "minLength": 1, "maxLength": 2000},
+          "timestamp": {"type": ["string", "null"], "maxLength": 64}
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "access",
+            "hardware",
+            "software",
+            "network",
+            "email",
+            "security",
+            "business_application",
+            "other"
+          ]
+        },
+        "priority": {"enum": ["P1", "P2", "P3", "P4"]},
+        "routing_queue": {
+          "enum": [
+            "service_desk_l1",
+            "identity_access",
+            "endpoint_support",
+            "network_operations",
+            "messaging_collaboration",
+            "security_operations",
+            "business_apps"
+          ]
+        },
+        "source_label": {"type": ["string", "null"]},
+        "source_priority": {"type": ["string", "null"]}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

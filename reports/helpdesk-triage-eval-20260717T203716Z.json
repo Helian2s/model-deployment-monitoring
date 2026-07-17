@@ -1,0 +1,262 @@
+{
+  "results": [
+    {
+      "decision": {
+        "category": "security",
+        "confidence": 0.95,
+        "priority": "P1",
+        "recommended_action": "Contact the IT security team to investigate the MFA reset and ensure the system is functioning correctly.",
+        "requires_human": true,
+        "routing_queue": "security_operations",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Finance department reports payroll portal access issue after MFA reset."
+      },
+      "expected": {
+        "category": "access",
+        "priority": "P2",
+        "routing_queue": "identity_access"
+      },
+      "id": "sample-001",
+      "latency_seconds": 1.2282462040311657,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "error": "{\"error\":{\"message\":\"Model output failed helpdesk triage schema validation\",\"type\":\"gateway_error\",\"request_id\":\"helpdesk-eval-2\"}}",
+      "expected": {
+        "category": "hardware",
+        "priority": "P2",
+        "routing_queue": "endpoint_support"
+      },
+      "id": "sample-002",
+      "latency_seconds": 1.0568789590033703,
+      "ok": false,
+      "status": 502
+    },
+    {
+      "decision": {
+        "category": "network",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Check the internal network configuration and firewall rules to ensure they are not blocking the required sites.",
+        "requires_human": true,
+        "routing_queue": "network_operations",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "VPN connects but internal sites time out from home Wi-Fi."
+      },
+      "expected": {
+        "category": "network",
+        "priority": "P2",
+        "routing_queue": "network_operations"
+      },
+      "id": "sample-003",
+      "latency_seconds": 1.3705187850282528,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "security",
+        "confidence": 0.95,
+        "priority": "P1",
+        "recommended_action": "Forward the suspicious email to the Procurement department for further investigation.",
+        "requires_human": true,
+        "routing_queue": "security_operations",
+        "safety_flags": [
+          "security_sensitive"
+        ],
+        "summary": "Suspicious email from a fake vendor attachment received."
+      },
+      "expected": {
+        "category": "security",
+        "priority": "P2",
+        "routing_queue": "security_operations"
+      },
+      "id": "sample-004",
+      "latency_seconds": 1.38487448298838,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "network",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Check Outlook calendar settings and verify network connectivity.",
+        "requires_human": true,
+        "routing_queue": "endpoint_support",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Outlook calendar invites are not syncing between phone and desktop."
+      },
+      "expected": {
+        "category": "email",
+        "priority": "P3",
+        "routing_queue": "messaging_collaboration"
+      },
+      "id": "sample-005",
+      "latency_seconds": 1.081748018041253,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "business_application",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Check the CRM's export settings and server logs for any errors or issues.",
+        "requires_human": true,
+        "routing_queue": "business_apps",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Customer Success team is experiencing issues with CRM export functionality."
+      },
+      "expected": {
+        "category": "business_application",
+        "priority": "P3",
+        "routing_queue": "business_apps"
+      },
+      "id": "sample-006",
+      "latency_seconds": 1.1590442940359935,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "software",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Install the openpyxl package via pip.",
+        "requires_human": true,
+        "routing_queue": "endpoint_support",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Analytics team needs to install openpyxl for XLSX import."
+      },
+      "expected": {
+        "category": "software",
+        "priority": "P4",
+        "routing_queue": "endpoint_support"
+      },
+      "id": "sample-007",
+      "latency_seconds": 1.2859354520333,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "business_application",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Forward the request to the Service Catalog support team for guidance.",
+        "requires_human": true,
+        "routing_queue": "business_apps",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Marketing team needs assistance in selecting the appropriate form for requesting a new shared mailbox."
+      },
+      "expected": {
+        "category": "other",
+        "priority": "P4",
+        "routing_queue": "service_desk_l1"
+      },
+      "id": "sample-008",
+      "latency_seconds": 1.1839718309929594,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "category": {
+        "accuracy": 0.5714,
+        "comparable": 7,
+        "correct": 4,
+        "field": "category"
+      },
+      "priority": {
+        "accuracy": 0.2857,
+        "comparable": 7,
+        "correct": 2,
+        "field": "priority"
+      },
+      "routing_queue": {
+        "accuracy": 0.5714,
+        "comparable": 7,
+        "correct": 4,
+        "field": "routing_queue"
+      }
+    },
+    "concurrency": 1,
+    "confidence": {
+      "max": 0.95,
+      "mean": 0.95,
+      "min": 0.95
+    },
+    "created_at": "2026-07-17T20:37:16.185223+00:00",
+    "dataset": "data/helpdesk/samples/helpdesk_triage_sample.jsonl",
+    "decision_distribution": {
+      "category": {
+        "business_application": 2,
+        "network": 2,
+        "security": 2,
+        "software": 1
+      },
+      "priority": {
+        "P1": 2,
+        "P3": 5
+      },
+      "safety_flags": {
+        "none": 6,
+        "security_sensitive": 1
+      }
+    },
+    "elapsed_seconds": 9.753,
+    "failed": 1,
+    "failures": [
+      {
+        "error": "{\"error\":{\"message\":\"Model output failed helpdesk triage schema validation\",\"type\":\"gateway_error\",\"request_id\":\"helpdesk-eval-2\"}}",
+        "expected": {
+          "category": "hardware",
+          "priority": "P2",
+          "routing_queue": "endpoint_support"
+        },
+        "id": "sample-002",
+        "latency_seconds": 1.0568789590033703,
+        "ok": false,
+        "status": 502
+      }
+    ],
+    "latency_seconds": {
+      "max": 1.385,
+      "mean": 1.219,
+      "min": 1.057,
+      "p50": 1.228,
+      "p95": 1.385,
+      "p99": 1.385
+    },
+    "requests": 8,
+    "requests_per_second": 0.82,
+    "status_counts": {
+      "200": 7,
+      "502": 1
+    },
+    "succeeded": 7,
+    "url": "http://127.0.0.1:18088/v1/helpdesk/triage"
+  }
+}

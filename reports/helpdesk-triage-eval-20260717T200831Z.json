@@ -1,0 +1,260 @@
+{
+  "results": [
+    {
+      "decision": {
+        "category": "security",
+        "confidence": 0.95,
+        "priority": "P1",
+        "recommended_action": "Verify the MFA reset was successful and contact the IT security team for further assistance.",
+        "requires_human": true,
+        "routing_queue": "security_operations",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "User cannot access payroll portal after MFA reset due to security issue."
+      },
+      "expected": {
+        "category": "access",
+        "priority": "P2",
+        "routing_queue": "identity_access"
+      },
+      "id": "sample-001",
+      "latency_seconds": 1.383676594006829,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "hardware",
+        "confidence": 0.95,
+        "priority": "P1",
+        "recommended_action": "Replace the laptop with a new one.",
+        "requires_human": true,
+        "routing_queue": "network_operations",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Laptop case bulging and overheating, urgent replacement needed."
+      },
+      "expected": {
+        "category": "hardware",
+        "priority": "P2",
+        "routing_queue": "endpoint_support"
+      },
+      "id": "sample-002",
+      "latency_seconds": 1.2326484190416522,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "network",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Check the internal DNS settings and ensure the firewall rules are correctly configured for the internal network.",
+        "requires_human": true,
+        "routing_queue": "network_operations",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "VPN connection works but internal sites are timing out due to DNS or firewall issues."
+      },
+      "expected": {
+        "category": "network",
+        "priority": "P2",
+        "routing_queue": "network_operations"
+      },
+      "id": "sample-003",
+      "latency_seconds": 1.4038385759922676,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "security",
+        "confidence": 0.95,
+        "priority": "P1",
+        "recommended_action": "Forward the email to the Procurement department for further investigation and report to the IT security team.",
+        "requires_human": true,
+        "routing_queue": "security_operations",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Suspicious email attachment from a fake vendor, potentially phishing."
+      },
+      "expected": {
+        "category": "security",
+        "priority": "P2",
+        "routing_queue": "security_operations"
+      },
+      "id": "sample-004",
+      "latency_seconds": 1.195670870016329,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "network",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Check Outlook calendar settings and verify network connectivity.",
+        "requires_human": true,
+        "routing_queue": "endpoint_support",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Outlook calendar invites are not syncing with desktop Outlook."
+      },
+      "expected": {
+        "category": "email",
+        "priority": "P3",
+        "routing_queue": "messaging_collaboration"
+      },
+      "id": "sample-005",
+      "latency_seconds": 1.044646265974734,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "software",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Check the CRM application logs for more details on the error 500.",
+        "requires_human": true,
+        "routing_queue": "business_apps",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "CRM export button fails with error 500, affecting Customer Success team."
+      },
+      "expected": {
+        "category": "business_application",
+        "priority": "P3",
+        "routing_queue": "business_apps"
+      },
+      "id": "sample-006",
+      "latency_seconds": 1.209840086987242,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "software",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Install the missing package openpyxl using pip.",
+        "requires_human": false,
+        "routing_queue": "endpoint_support",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Analytics team needs Python package installation for XLSX import."
+      },
+      "expected": {
+        "category": "software",
+        "priority": "P4",
+        "routing_queue": "endpoint_support"
+      },
+      "id": "sample-007",
+      "latency_seconds": 1.2479479410103522,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    },
+    {
+      "decision": {
+        "category": "other",
+        "confidence": 0.95,
+        "priority": "P3",
+        "recommended_action": "Forward the request to the Service Catalog support team for guidance.",
+        "requires_human": true,
+        "routing_queue": "service_desk_l1",
+        "safety_flags": [
+          "none"
+        ],
+        "summary": "Marketing team needs assistance in selecting the appropriate form for a new shared mailbox."
+      },
+      "expected": {
+        "category": "other",
+        "priority": "P4",
+        "routing_queue": "service_desk_l1"
+      },
+      "id": "sample-008",
+      "latency_seconds": 1.2840701219975017,
+      "missing_fields": [],
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "summary": {
+    "accuracy": {
+      "category": {
+        "accuracy": 0.625,
+        "comparable": 8,
+        "correct": 5,
+        "field": "category"
+      },
+      "priority": {
+        "accuracy": 0.25,
+        "comparable": 8,
+        "correct": 2,
+        "field": "priority"
+      },
+      "routing_queue": {
+        "accuracy": 0.625,
+        "comparable": 8,
+        "correct": 5,
+        "field": "routing_queue"
+      }
+    },
+    "concurrency": 1,
+    "confidence": {
+      "max": 0.95,
+      "mean": 0.95,
+      "min": 0.95
+    },
+    "created_at": "2026-07-17T20:08:31.451415+00:00",
+    "dataset": "data/helpdesk/samples/helpdesk_triage_sample.jsonl",
+    "decision_distribution": {
+      "category": {
+        "hardware": 1,
+        "network": 2,
+        "other": 1,
+        "security": 2,
+        "software": 2
+      },
+      "priority": {
+        "P1": 3,
+        "P3": 5
+      },
+      "safety_flags": {
+        "none": 8
+      }
+    },
+    "elapsed_seconds": 10.004,
+    "failed": 0,
+    "failures": [],
+    "latency_seconds": {
+      "max": 1.404,
+      "mean": 1.25,
+      "min": 1.045,
+      "p50": 1.248,
+      "p95": 1.404,
+      "p99": 1.404
+    },
+    "requests": 8,
+    "requests_per_second": 0.8,
+    "status_counts": {
+      "200": 8
+    },
+    "succeeded": 8,
+    "url": "http://127.0.0.1:18088/v1/helpdesk/triage"
+  }
+}

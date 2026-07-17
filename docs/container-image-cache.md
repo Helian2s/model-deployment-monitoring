@@ -1,6 +1,6 @@
 # Container Image Cache And ECR Mirror
 
-Last updated: 2026-07-16
+Last updated: 2026-07-17 UTC
 
 ## Decision
 
@@ -61,11 +61,11 @@ Repository defaults:
 | Repository | Status |
 | --- | --- |
 | `ncp-genl/tritonserver` | Active |
-| `ncp-genl/tritonserver-sdk` | Active |
+| `ncp-genl/tritonserver-sdk` | Active, deployed as SDK toolbox |
 | `ncp-genl/cuda` | Active |
 | `ncp-genl/dcgm-exporter` | Active |
 | `ncp-genl/k8s-device-plugin` | Mirrored for later EKS phase |
-| `ncp-genl/nemo-guardrails` | Mirrored for later safety/compliance phase |
+| `ncp-genl/nemo-guardrails` | Active, deployed for safety/compliance phase |
 | `ncp-genl/garak` | Mirrored for later safety/evaluation phase |
 | `ncp-genl/mistral-7b-instruct-v0.3-nim` | Mirrored for later NIM comparison only |
 | `ncp-genl/prometheus` | Mirrored for observability stack |
@@ -73,7 +73,7 @@ Repository defaults:
 | `ncp-genl/alertmanager` | Mirrored for alerting stack |
 | `ncp-genl/node-exporter` | Mirrored for observability stack |
 | `ncp-genl/cadvisor` | Mirrored for container metrics |
-| `ncp-genl/api-gateway` | Repository created; image not built yet |
+| `ncp-genl/api-gateway` | Active |
 
 ## Mirrored Images
 
@@ -97,6 +97,7 @@ Repository defaults:
 | Alertmanager | `prom/alertmanager:v0.33.1` | `037678282394.dkr.ecr.us-west-2.amazonaws.com/ncp-genl/alertmanager:v0.33.1` | `sha256:a89f8d4520954079275441eecdb71444328bd90633dd4eddfc33b9ed657f349b` | 39.8 MB |
 | Node exporter | `prom/node-exporter:v1.12.1` | `037678282394.dkr.ecr.us-west-2.amazonaws.com/ncp-genl/node-exporter:v1.12.1` | `sha256:da83fae85603c4e47e6c68369a7d746e2dda683dc35ea2e234b4f171e0d92798` | 13.4 MB |
 | cAdvisor | `gcr.io/cadvisor/cadvisor:v0.55.1` | `037678282394.dkr.ecr.us-west-2.amazonaws.com/ncp-genl/cadvisor:v0.55.1` | `sha256:8c2a7908e0fa112277c5e30c2345ef02c0789b2042082e544e5a6daeab150f69` | 30.8 MB |
+| API gateway | local custom build from `services/api-gateway` | `037678282394.dkr.ecr.us-west-2.amazonaws.com/ncp-genl/api-gateway:0.3.4` | `sha256:81d5c5aebaac7114b54c7a89bfa1eefede03df7fc82cfddaef50c1145c1e3db2` | about 56.9 MB |
 
 Total current `ncp-genl/*` image storage reported by ECR is about 85.95 GB.
 
@@ -143,14 +144,6 @@ docker --config "$tmp_docker_config" push "$target_image"
 rm -rf "$tmp_docker_config"
 ```
 
-## Repositories Without Images
-
-These repositories exist, but no image has been built or pushed yet.
-
-| Repository | Reason |
-| --- | --- |
-| `ncp-genl/api-gateway` | Custom application image will be built after the gateway code exists. |
-
 ## Runtime Secrets
 
 The following parameters exist in SSM Parameter Store as `SecureString` values. Their values must not be printed, committed, or written to logs.
@@ -159,6 +152,7 @@ The following parameters exist in SSM Parameter Store as `SecureString` values. 
 | --- | --- |
 | NGC / NVCR authentication | `/finetuning/ngc/api-key` |
 | Hugging Face model access | `/finetuning/huggingface/token` |
+| API gateway request authentication | `/ncp-genl/api-gateway/api-key` |
 
 Use the Hugging Face token at runtime when the model download path needs authentication, gated model access, or rate-limit protection. For the Triton/vLLM container, pass it as the standard Hugging Face token environment variable used by the runtime, preferably `HF_TOKEN`.
 

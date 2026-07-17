@@ -203,7 +203,17 @@ Then move the main project to EKS/Kubernetes for:
 
 Docker Compose is acceptable only for same-host learning and fast iteration. It is not the production/failover orchestration layer.
 
-The first persistent single-node slice is implemented with `tools/ec2_single_node_up.sh`, `tools/ec2_single_node_validate.sh`, and `tools/ec2_single_node_down.sh`. It runs Triton, DCGM exporter, Prometheus, Alertmanager, Grafana, node exporter, and cAdvisor on one `g6.2xlarge` instance. See `docs/ec2-single-node-slice-2026-07-17.md`.
+The first persistent single-node slice is implemented with `tools/ec2_single_node_up.sh`, `tools/ec2_single_node_validate.sh`, and `tools/ec2_single_node_down.sh`. It runs the API gateway, Triton, NeMo Guardrails, Triton SDK toolbox, DCGM exporter, Prometheus, Alertmanager, Grafana, node exporter, and cAdvisor on one `g6.2xlarge` instance. See `docs/ec2-single-node-slice-2026-07-17.md`.
+
+For temporary pauses, use `tools/ec2_single_node_stop.sh` instead of the termination script. The EC2 deployment installs `ncp-genl-stack.service`, so a later EC2 start automatically runs the Docker Compose stack again. Operators should still allow several minutes for Triton to finish loading the model before expecting full API readiness.
+
+NeMo Guardrails is deployed, validated, and wired into the live `/v1/helpdesk/triage` path. The gateway performs deterministic pre-model checks for prompt injection, possible secrets, PII markers, and security-sensitive tickets, then calls the Guardrails microservice before model inference.
+
+The live helpdesk path currently uses the project `helpdesk-triage` NeMo config. LLM-based NeMo self-check is disabled because both the bundled `self-check` config and the first custom self-check prompt produced false positives on a normal payroll-access ticket. Deterministic gateway checks are the enforced input safety layer until a labeled helpdesk safety set is available for calibration.
+
+The first scenario-specific workflow is the IT Helpdesk Triage Assistant. It uses the existing Triton/Qwen serving stack and adds a strict `/v1/helpdesk/triage` API contract for ticket category, priority, routing queue, summary, recommended action, confidence, human-escalation flag, and safety flags.
+
+The scenario is intentionally production-shaped but narrow: the assistant prepares work for a human service desk and does not autonomously resolve tickets. Quality will be measured with normalized helpdesk datasets and report artifacts under `reports/`.
 
 ## Observability
 
@@ -230,7 +240,11 @@ Dashboards should cover:
 - readiness failures;
 - pod restarts;
 - guardrail block counts;
-- safety test outcomes.
+- safety test outcomes;
+- helpdesk triage invalid-output rate;
+- helpdesk category/priority/routing accuracy;
+- helpdesk confidence and human-escalation rate.
+- helpdesk output repair rate.
 
 ## Alerting
 

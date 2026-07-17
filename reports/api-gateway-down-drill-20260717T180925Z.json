@@ -1,0 +1,30 @@
+{
+  "drill": "api-gateway-down",
+  "alert_name": "ApiGatewayDown",
+  "timeline": {
+    "started_at": "2026-07-17T18:07:48Z",
+    "gateway_stopped_at": "2026-07-17T18:07:58Z",
+    "alert_pending_at": "2026-07-17T18:08:09Z",
+    "alert_firing_at": "2026-07-17T18:09:09Z",
+    "gateway_restarted_at": "2026-07-17T18:09:09Z",
+    "gateway_ready_at": "2026-07-17T18:09:14Z",
+    "alert_cleared_at": "2026-07-17T18:09:24Z"
+  },
+  "durations_seconds": {
+    "stop_to_firing": 70,
+    "restart_to_ready": 5,
+    "restart_to_alert_clear": 15
+  },
+  "states": {
+    "initial_alert_state": "inactive",
+    "last_state_while_down": "firing",
+    "last_state_after_recovery": "inactive",
+    "api_gateway_target_health": "up",
+    "api_gateway_container": "status=running restart_count=0 started_at=2026-07-17T18:09:09.180187467Z"
+  },
+  "success": {
+    "alert_fired": true,
+    "gateway_recovered": true,
+    "alert_cleared": true
+  }
+}

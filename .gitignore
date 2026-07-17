@@ -222,3 +222,7 @@ aws-inventory/
 
 # Local EC2 lab state
 .ncp-genl/
+
+# Helpdesk scenario datasets
+data/helpdesk/raw/
+data/helpdesk/normalized/
