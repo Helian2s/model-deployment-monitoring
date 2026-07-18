@@ -58,7 +58,7 @@ The gateway blocks prompt-injection attempts and possible secrets before any mod
 
 Current live NeMo config: `helpdesk-triage`.
 
-Important finding: the bundled `self-check` config, and the first custom LLM self-check prompt, were too broad for this helpdesk scenario and blocked a normal payroll-access ticket during validation. The current production-style slice therefore uses a source-controlled NeMo `helpdesk-triage` proxy config plus deterministic gateway policy checks. The next safety step is calibrating an LLM-based NeMo self-check on a labeled helpdesk safety set before enabling it.
+Important finding: the bundled `self-check` config, and the first custom LLM self-check prompt, were too broad for this helpdesk scenario and blocked a normal payroll-access ticket during validation. The source-controlled `helpdesk-triage` config now enables a narrow NeMo `self check input` rail for scope, prompt-injection, secrets, and authorization-bypass checks. Deterministic gateway policy remains the primary enforcement layer until the rail is calibrated against a labeled helpdesk safety set.
 
 ## Dataset Plan
 

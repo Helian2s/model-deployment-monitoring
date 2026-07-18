@@ -2,6 +2,21 @@
 
 This file tracks project decisions and implementation changes. Add new entries at the top.
 
+## 2026-07-17 UTC - Narrow Helpdesk NeMo Input Rail Added
+
+- Updated `services/nemo-guardrails/configs/helpdesk-triage.json` to enable one narrow NeMo `self check input` rail.
+- The active rail covers:
+  - scope checks for internal IT support triage;
+  - prompt-injection attempts;
+  - secrets or credentials in ticket text;
+  - requests to bypass authorization, grant access, disable controls, or impersonate an administrator.
+- The rail prompt explicitly allows normal helpdesk tickets about MFA, payroll, access requests, phishing, malware, suspicious login, names, emails, departments, urgent business impact, and deadlines.
+- Kept output contract, priority policy, safe-action policy, PII flagging, security-sensitive flagging, and human-handoff behavior deterministic in the API gateway.
+- Updated `tools/ec2_single_node_up.sh` so the EC2 deployment reads the source-controlled JSON config, validates it with `jq`, transfers it to `/opt/ncp-genl/guardrails/helpdesk-triage.json`, and registers it with the NeMo Guardrails microservice.
+- Updated validation so `helpdesk-triage` must contain `rails.input.flows=["self check input"]` and a `self_check_input` prompt.
+- Added `docs/nemo-helpdesk-rails.md` to document rail locations, active policy, and deployment status.
+- Deployment note: the EC2 instance is stopped, so the live NeMo SQLite config will receive this rail only after the next EC2 start and deployment/update registration.
+
 ## 2026-07-17 UTC - EC2 Pause And Boot Resume
 
 - Added systemd service `ncp-genl-stack.service` during EC2 deployment.

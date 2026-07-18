@@ -209,7 +209,7 @@ For temporary pauses, use `tools/ec2_single_node_stop.sh` instead of the termina
 
 NeMo Guardrails is deployed, validated, and wired into the live `/v1/helpdesk/triage` path. The gateway performs deterministic pre-model checks for prompt injection, possible secrets, PII markers, and security-sensitive tickets, then calls the Guardrails microservice before model inference.
 
-The live helpdesk path currently uses the project `helpdesk-triage` NeMo config. LLM-based NeMo self-check is disabled because both the bundled `self-check` config and the first custom self-check prompt produced false positives on a normal payroll-access ticket. Deterministic gateway checks are the enforced input safety layer until a labeled helpdesk safety set is available for calibration.
+The live helpdesk path uses the project `helpdesk-triage` NeMo config. The source-controlled config now enables a narrow NeMo `self check input` rail for scope, prompt-injection, secrets, and authorization-bypass checks. Deterministic gateway checks remain the primary enforcement layer until a labeled helpdesk safety set is available for calibration.
 
 The first scenario-specific workflow is the IT Helpdesk Triage Assistant. It uses the existing Triton/Qwen serving stack and adds a strict `/v1/helpdesk/triage` API contract for ticket category, priority, routing queue, summary, recommended action, confidence, human-escalation flag, and safety flags.
 

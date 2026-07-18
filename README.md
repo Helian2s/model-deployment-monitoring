@@ -14,6 +14,7 @@ Current live path: API gateway -> NeMo Guardrails microservice -> API gateway in
 - [EC2 single-node Triton slice](docs/ec2-single-node-slice-2026-07-17.md)
 - [API gateway](docs/api-gateway.md)
 - [IT Helpdesk Triage Assistant scenario](docs/helpdesk-triage-scenario.md)
+- [NeMo helpdesk rails](docs/nemo-helpdesk-rails.md)
 - [Monitoring baseline](docs/monitoring-baseline-2026-07-17.md)
 - [API gateway down reliability drill](docs/reliability-drill-api-gateway-down-2026-07-17.md)
 

@@ -184,7 +184,7 @@ The EC2 Docker Compose stack:
 - sets `TRITON_BASE_URL=http://triton:8000`;
 - enables API-key enforcement from `/ncp-genl/api-gateway/api-key`;
 - enables `HELPDESK_GUARDRAILS_ENABLED=true`;
-- registers the `helpdesk-triage` NeMo Guardrails config;
+- registers the `helpdesk-triage` NeMo Guardrails config with the narrow `self check input` rail;
 - points the gateway at `http://nemo-guardrails:7331`;
 - enables `/internal/v1/chat/completions` so NeMo can call the gateway as an OpenAI-compatible model endpoint;
 - requires the normal gateway API key on the internal model endpoint when API-key enforcement is enabled;
@@ -195,8 +195,8 @@ The EC2 Docker Compose stack:
 
 Next integration work:
 
-- tune a scenario-specific NeMo Guardrails config instead of relying on the bundled `default` proxy config;
-- calibrate an LLM-based NeMo self-check before enabling it, because both the bundled and first custom self-check prompts false-positive on normal helpdesk tickets;
+- calibrate the narrow NeMo `self check input` rail on a labeled helpdesk safety set;
+- add output rails only after measuring false positives and confirming blocked output maps cleanly to the gateway API contract;
 - add a persistent audit/event sink with redaction controls;
 - run load tests against both `/v1/chat/completions` and `/v1/helpdesk/triage`;
 - add distributed rate limiting before moving beyond a single host.

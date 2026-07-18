@@ -188,10 +188,21 @@ curl -fsS "http://127.0.0.1:${NEMO_GUARDRAILS_HOST_PORT}/v1/health/ready" | jq .
 echo "== nemo guardrails configs =="
 nemo_configs="$(curl -fsS "http://127.0.0.1:${NEMO_GUARDRAILS_HOST_PORT}/v1/guardrail/configs")"
 printf '%s\n' "$nemo_configs" | jq '{count: (.data | length), names: [.data[]?.name]}'
+printf '%s\n' "$nemo_configs" | jq '
+  .data[]
+  | select(.namespace == "default" and .name == "helpdesk-triage")
+  | {
+      input_flows: .data.rails.input.flows,
+      output_flows: .data.rails.output.flows,
+      prompt_tasks: [.data.prompts[]?.task],
+      active_nemo_input_rails: .data.custom_data.active_nemo_input_rails
+    }
+'
 printf '%s\n' "$nemo_configs" | jq -e '
   .data[]
   | select(.namespace == "default" and .name == "helpdesk-triage")
-  | select((.data.rails.input.flows | length) == 0)
+  | select((.data.rails.input.flows | index("self check input")) != null)
+  | select(any(.data.prompts[]?; .task == "self_check_input"))
 ' >/dev/null
 
 echo "== triton sdk tools =="

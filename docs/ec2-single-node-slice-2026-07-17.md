@@ -156,7 +156,8 @@ Current Guardrails integration:
 - NeMo receives that key through `NIM_API_KEY` and `NIM_ENDPOINT_API_KEY`.
 - The deployed helpdesk Guardrails config is `helpdesk-triage`.
 - The config is registered during EC2 deployment from `services/nemo-guardrails/configs/helpdesk-triage.json`.
-- Known safety gap: the bundled `self-check` config and the first custom LLM self-check prompt produced false positives on a normal payroll-access ticket. LLM-based NeMo self-check should stay disabled until calibrated against a labeled helpdesk safety set.
+- The source-controlled config now enables a narrow NeMo `self check input` rail for scope, prompt-injection, secrets, and authorization-bypass checks.
+- Known safety gap: the earlier broad LLM self-check produced false positives on a normal payroll-access ticket. The narrow rail must be evaluated against a labeled helpdesk safety set after the next live deploy.
 
 Baseline load test through the gateway:
 
